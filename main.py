@@ -7,7 +7,7 @@ import mutagen  # Để xác định độ dài âm thanh
 
 if not os.path.exists('/home/appuser/.cache/ms-playwright'):
     subprocess.run(['bash', 'install_dependencies.sh'])
-    subprocess.run(['bash', 'install_playwright.sh'])
+    subprocess.run(['playwright', 'install'])
 # Hàm chụp màn hình bài đăng phổ biến trên Reddit
 async def capture_reddit_posts():
     print("Bắt đầu chụp màn hình Reddit...")
