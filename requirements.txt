@@ -1,3 +1,5 @@
 selenium
 gtts
 mutagen
+seleniumbase
+webdriver-manager
