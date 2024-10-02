@@ -3,3 +3,4 @@ gtts
 mutagen
 requests
 flask
+webdriver-manager
