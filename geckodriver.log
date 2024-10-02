@@ -1,0 +1,35 @@
+1727862043747	geckodriver	INFO	Listening on 127.0.0.1:55336
+1727862059696	geckodriver	INFO	Listening on 127.0.0.1:55349
+1727862181084	geckodriver	INFO	Listening on 127.0.0.1:55363
+1727862265722	geckodriver	INFO	Listening on 127.0.0.1:55381
+1727862268772	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "553 ... 2" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ADmin\\AppData\\Local\\Temp\\rust_mozprofileFbpnOF"
+*** You are running in headless mode.
+1727862397476	geckodriver	INFO	Listening on 127.0.0.1:55424
+1727862400505	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "554 ... 5" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ADmin\\AppData\\Local\\Temp\\rust_mozprofilel1ffTs"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1727862400740	Marionette	INFO	Marionette enabled
+1727862400837	Marionette	INFO	Listening on port 55432
+WebDriver BiDi listening on ws://127.0.0.1:55425
+Read port: 55432
+1727862400949	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+JavaScript warning: https://accounts.google.com/gsi/iframe/select?client_id=705819728788-b2c1kcs7tst3b7ghv7at0hkqmtc68ckl.apps.googleusercontent.com&auto_select=true&ux_mode=popup&ui_mode=card&as=rPadEFrFQ7X1TJY%2BG3w%2F3A&is_itp=true&channel_id=0c95fd7039679238e404054feed0162c7e2d2abb938ed30845dfc21d8baa082d&origin=https%3A%2F%2Fwww.reddit.com, line 66: Script terminated by timeout at:
+Mb@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiYUEM/d=1/rs=AF0KOtUbcla9Od9_ry6It-0RkA_sqFTjiQ/m=credential_server_library:66:273
+_.Ob@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiYUEM/d=1/rs=AF0KOtUbcla9Od9_ry6It-0RkA_sqFTjiQ/m=credential_server_library:79:2509
+Pb@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiYUEM/d=1/rs=AF0KOtUbcla9Od9_ry6It-0RkA_sqFTjiQ/m=credential_server_library:67:352
+_.rd@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiYUEM/d=1/rs=AF0KOtUbcla9Od9_ry6It-0RkA_sqFTjiQ/m=credential_server_library:79:2551
+Mi@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiYUEM/d=1/rs=AF0KOtUbcla9Od9_ry6It-0RkA_sqFTjiQ/m=credential_server_library:215:222
+Ii.prototype.D@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiYUEM/d=1/rs=AF0KOtUbcla9Od9_ry6It-0RkA_sqFTjiQ/m=credential_server_library:212:29
+Ii/<@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiYUEM/d=1/rs=AF0KOtUbcla9Od9_ry6It-0RkA_sqFTjiQ/m=credential_server_library:206:282
+
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+JavaScript error: resource://gre/actors/PictureInPictureChild.sys.mjs, line 657: TypeError: MutationObserver.observe: Argument 1 is not an object.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
