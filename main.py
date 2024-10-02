@@ -13,7 +13,7 @@ import server,requests
 def init_webdriver():
     options = Options()
     options.add_argument('-headless')  # Run in headless mode
-    options.binary_location = '/usr/bin/geckodriver'
+    options.binary_location = '/usr/bin/firefox'
     #service = Service(FirefoxDriverManager(chrome_type=FirefoxType.CHROMIUM).install())  # Path to your geckodriver
     driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=options)
     return driver
