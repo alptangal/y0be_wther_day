@@ -1,75 +1,66 @@
-import asyncio
 import os
+import time
 import subprocess
-from playwright.async_api import async_playwright
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
 from gtts import gTTS
 import mutagen  # Để xác định độ dài âm thanh
 
-if not os.path.exists('/home/appuser/.cache/ms-playwright'):
-    subprocess.run(['bash', 'install_dependencies.sh'])
-    subprocess.run(['playwright', 'install'])
+# Cài đặt Chrome Driver
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Chạy trình duyệt ở chế độ không hiển thị
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+service = Service('/path/to/chromedriver')  # Thay đổi đường dẫn đến chromedriver
+
 # Hàm chụp màn hình bài đăng phổ biến trên Reddit
-async def capture_reddit_posts():
+def capture_reddit_posts():
     print("Bắt đầu chụp màn hình Reddit...")
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)  # Chạy Chromium với giao diện
-        context = await browser.new_context()
-        page = await context.new_page()
+    driver = webdriver.Chrome(service=service, options=chrome_options)
 
-        # Truy cập Reddit
-        await page.goto('https://www.reddit.com/r/all/new')  # Sử dụng 'new' để lấy bài đăng mới nhất
-        await page.wait_for_timeout(5000)  # Đợi để trang tải hoàn toàn
+    # Truy cập Reddit
+    driver.get('https://www.reddit.com/r/all/new')  # Sử dụng 'new' để lấy bài đăng mới nhất
+    time.sleep(5)  # Đợi để trang tải hoàn toàn
 
-        # Lặp vô hạn để liên tục lấy các bài đăng mới
-        while True:
-            posts = await page.query_selector_all('article.w-full.m-0')
+    # Lặp để lấy các bài đăng
+    while True:
+        posts = driver.find_elements(By.CSS_SELECTOR, 'article.w-full.m-0')
 
-            # Lặp qua tối đa 2 bài đăng đầu tiên
-            for index, post in enumerate(posts[:2]):  # Giới hạn chỉ lấy 2 bài đăng
-                # Cuộn tới bài đăng
-                await post.scroll_into_view_if_needed()
-                await asyncio.sleep(1)  # Đợi một chút để đảm bảo bài đăng hiển thị
+        # Lặp qua tối đa 2 bài đăng đầu tiên
+        for index, post in enumerate(posts[:2]):  # Giới hạn chỉ lấy 2 bài đăng
+            # Cuộn tới bài đăng
+            ActionChains(driver).move_to_element(post).perform()
+            time.sleep(1)  # Đợi một chút để đảm bảo bài đăng hiển thị
 
-                # Lấy vị trí của bài đăng và chụp ảnh
-                bounding_box = await post.bounding_box()
-                if bounding_box and bounding_box['width'] > 0 and bounding_box['height'] > 0:
-                    post_image_path = f'reddit_post_{index}.png'
-                    await page.screenshot(path=post_image_path, clip={
-                        'x': int(bounding_box['x']),
-                        'y': int(bounding_box['y']),
-                        'width': int(bounding_box['width']),
-                        'height': int(bounding_box['height'])
-                    })
-                    print(f"Đã chụp màn hình bài đăng {index + 1}: {post_image_path}")
+            # Lấy vị trí của bài đăng và chụp ảnh
+            post_image_path = f'reddit_post_{index}.png'
+            post.screenshot(post_image_path)
+            print(f"Đã chụp màn hình bài đăng {index + 1}: {post_image_path}")
 
-                    # Lấy tiêu đề bài đăng để chuyển đổi thành giọng nói
-                    title_link = await post.query_selector('a.absolute.inset-0')  # Cập nhật selector
-                    if title_link:
-                        title_text = await title_link.inner_text()
-                        # Tạo file âm thanh từ tiêu đề
-                        audio_file_path = f'reddit_post_audio_{index}.mp3'
-                        tts = gTTS(text=title_text, lang='en')  # Sử dụng tiếng Anh
-                        tts.save(audio_file_path)  # Ghi âm thanh vào file tạm thời
-                        print(f"Đã tạo âm thanh cho bài đăng {index + 1}: {audio_file_path}")
+            # Lấy tiêu đề bài đăng để chuyển đổi thành giọng nói
+            title_link = post.find_element(By.CSS_SELECTOR, 'a.absolute.inset-0')  # Cập nhật selector
+            title_text = title_link.text
 
-                        # Lấy độ dài âm thanh
-                        audio_length = get_audio_length(audio_file_path)
-                        print(f"Độ dài âm thanh bài đăng {index + 1}: {audio_length} giây")
+            # Tạo file âm thanh từ tiêu đề
+            audio_file_path = f'reddit_post_audio_{index}.mp3'
+            tts = gTTS(text=title_text, lang='en')  # Sử dụng tiếng Anh
+            tts.save(audio_file_path)  # Ghi âm thanh vào file tạm thời
+            print(f"Đã tạo âm thanh cho bài đăng {index + 1}: {audio_file_path}")
 
-                        # Khởi động FFmpeg để phát trực tiếp với bài đăng này
-                        start_stream_to_youtube(audio_file_path, post_image_path, title_text, audio_length)
+            # Lấy độ dài âm thanh
+            audio_length = get_audio_length(audio_file_path)
+            print(f"Độ dài âm thanh bài đăng {index + 1}: {audio_length} giây")
 
-                else:
-                    print(f"Bài đăng {index + 1} không có bounding box hợp lệ.")
+            # Khởi động FFmpeg để phát trực tiếp với bài đăng này
+            start_stream_to_youtube(audio_file_path, post_image_path, title_text, audio_length)
 
-                # Cuộn xuống để xem bài đăng tiếp theo
-                await page.keyboard.press('PageDown')
-                await asyncio.sleep(1)  # Đợi 1 giây trước khi cuộn
+        time.sleep(60)  # Đợi 60 giây trước khi lấy bài đăng mới
+        driver.get('https://www.reddit.com/r/all/new')  # Tải lại trang mới
 
-            await asyncio.sleep(60)  # Đợi 60 giây trước khi lấy bài đăng mới
-            await page.goto('https://www.reddit.com/r/all/new')  # Tải lại trang mới
-
-        await browser.close()
+    driver.quit()
 
 # Hàm để lấy độ dài âm thanh
 def get_audio_length(file_path):
@@ -78,7 +69,7 @@ def get_audio_length(file_path):
 
 # Hàm sử dụng FFmpeg để phát trực tiếp lên YouTube
 def start_stream_to_youtube(audio_file, image_file, subtitle, duration):
-    stream_key = os.environ.get('id')  # Khóa stream YouTube
+    stream_key = "pmfq-5pc5-u1e8-5s1p-caqf"  # Khóa stream YouTube
 
     # Tách từng từ trong tiêu đề và tạo thời gian cho mỗi từ
     words = subtitle.split()
@@ -111,9 +102,5 @@ def start_stream_to_youtube(audio_file, image_file, subtitle, duration):
     subprocess.Popen(ffmpeg_command)
 
 # Hàm chính để vừa chụp màn hình vừa phát trực tiếp
-async def main():
-    await capture_reddit_posts()  # Chụp ảnh các bài đăng Reddit
-
 if __name__ == "__main__":
-    # Chạy chương trình
-    asyncio.run(main())
+    capture_reddit_posts()  # Chụp ảnh các bài đăng Reddit
