@@ -6,6 +6,8 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from gtts import gTTS
 import mutagen
+import requests
+import server
 
 # Đường dẫn đến ChromeDriver
 CHROMEDRIVER_PATH = 'chromedriver'  # Thay đổi đường dẫn này nếu cần
@@ -98,5 +100,11 @@ def start_stream_to_youtube(audio_file, image_file, subtitle, duration):
     subprocess.Popen(ffmpeg_command)
 
 # Hàm chính
-if __name__ == "__main__":
+try:
+    req=requests.get('http://localhost:8888')
+    print(req.status_code)
+    print('Client closed')
+    exit()
+except:
+    server.b()
     capture_reddit_posts()  # Chụp ảnh các bài đăng Reddit
