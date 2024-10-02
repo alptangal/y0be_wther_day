@@ -14,7 +14,7 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")  # Chạy trình duyệt ở chế độ không hiển thị
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
-service = Service('/path/to/chromedriver')  # Thay đổi đường dẫn đến chromedriver
+service = Service('chromedriver')  # Thay đổi đường dẫn đến chromedriver
 
 # Hàm chụp màn hình bài đăng phổ biến trên Reddit
 def capture_reddit_posts():
