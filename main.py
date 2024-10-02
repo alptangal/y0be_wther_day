@@ -1,4 +1,4 @@
-import os
+import os,sys
 import time
 import subprocess
 from selenium import webdriver
@@ -108,7 +108,7 @@ try:
     req=requests.get('http://localhost:8888')
     print(req.status_code)
     print('Client closed')
-    exit()
+    sys.exit()
 except:
     server.b()
     capture_reddit_posts()  # Chụp ảnh các bài đăng Reddit
