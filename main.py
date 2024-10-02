@@ -5,6 +5,8 @@ from playwright.async_api import async_playwright
 from gtts import gTTS
 import mutagen  # Để xác định độ dài âm thanh
 
+if not os.path.exists('/home/appuser/.cache/ms-playwright'):
+    subprocess.run(['bash', 'install_playwright.sh'])
 # Hàm chụp màn hình bài đăng phổ biến trên Reddit
 async def capture_reddit_posts():
     print("Bắt đầu chụp màn hình Reddit...")

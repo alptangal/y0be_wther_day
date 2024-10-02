@@ -1,3 +1,4 @@
 playwright
 gtts
 mutagen
+playwright-cli
