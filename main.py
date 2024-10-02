@@ -109,6 +109,7 @@ try:
     print(req.status_code)
     print('Client closed')
     sys.exit()
-except:
+except Exception as e:
+    print(e)
     server.b()
     capture_reddit_posts()  # Chụp ảnh các bài đăng Reddit
