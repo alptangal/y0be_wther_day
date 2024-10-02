@@ -4,10 +4,10 @@ import subprocess
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from gtts import gTTS
 import mutagen
-import requests
-import server
+import server,requests
 
 # Đường dẫn đến ChromeDriver
 CHROMEDRIVER_PATH = 'chromedriver'  # Thay đổi đường dẫn này nếu cần
@@ -16,10 +16,14 @@ CHROMEDRIVER_PATH = 'chromedriver'  # Thay đổi đường dẫn này nếu c�
 def capture_reddit_posts():
     print("Bắt đầu chụp màn hình Reddit...")
     
-    # Khởi động Chrome
+    # Cấu hình các tùy chọn cho Chrome
+    options = Options()
+    options.add_argument("--headless")  # Chạy trong chế độ headless
+    options.add_argument("--no-sandbox")  # Vô hiệu hóa sandbox
+    options.add_argument("--disable-dev-shm-usage")  # Khắc phục vấn đề với shared memory
+
+    # Khởi động ChromeDriver
     service = Service(CHROMEDRIVER_PATH)
-    options = webdriver.ChromeOptions()
-    options.headless = False  # Chạy với giao diện, có thể chuyển sang True nếu không cần giao diện
     driver = webdriver.Chrome(service=service, options=options)
 
     driver.get('https://www.reddit.com/r/all/new')  # Truy cập Reddit
