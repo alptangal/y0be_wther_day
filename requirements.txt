@@ -6,3 +6,4 @@ flask
 webdriver-manager
 SpeechRecognition
 pydub
+emoji
