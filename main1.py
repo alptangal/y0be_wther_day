@@ -3,6 +3,8 @@ import time
 import os
 from threading import Thread
 from datetime import datetime
+import server
+import requests
 
 # Đường dẫn đến script tạo video của bạn
 MAIN_SCRIPT_PATH = "main.py"
@@ -96,4 +98,11 @@ def main():
             time.sleep(60)  # Đợi 1 phút trước khi thử lại
 
 if __name__ == "__main__":
-    main()
+    try:
+        req=requests.get('http://localhost:8888')
+        print(req.status_code)
+        print('Client closed')
+        exit()
+    except:
+        server.b()
+        main()
