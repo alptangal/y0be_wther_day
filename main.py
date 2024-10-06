@@ -1,37 +1,34 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.service import Service as ChromiumService
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.os_manager import ChromeType
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support import expected_conditions as EC
 import time
 from PIL import Image
 from gtts import gTTS
 import subprocess
-import os,random
+import os
+import random
 import speech_recognition as sr
 from pydub import AudioSegment
 import re
 import emoji
 
 def remove_special_characters(string):
-    # Định nghĩa pattern để giữ lại chữ cái, số và khoảng trắng
     pattern = r'[^a-zA-Z0-9\s]'
-    
-    # Thay thế các ký tự đặc biệt bằng chuỗi rỗng
     cleaned_string = re.sub(pattern, '', string)
-    
-    # Loại bỏ khoảng trắng thừa và trả về kết quả
     return ' '.join(cleaned_string.split())
-def remove_emojis(text):
-    # Chuyển đổi emoji thành mô tả Unicode
-    text = emoji.demojize(text)
-    
-    # Xóa các mô tả Unicode của emoji
-    text = re.sub(r':[a-zA-Z_]+:', '', text)
-    
-    return text
 
+def remove_emojis(text):
+    text = emoji.demojize(text)
+    text = re.sub(r':[a-zA-Z_]+:', '', text)
+    return text
 
 def scroll_to_element_center(driver, element):
     viewport_height = driver.execute_script("return window.innerHeight;")
@@ -44,32 +41,39 @@ def capture_full_screenshot(driver):
     return driver.get_screenshot_as_png()
 
 def capture_post_screenshot(driver):
-    post_content = driver.find_element(By.XPATH, '//shreddit-post')
-    scroll_to_element_center(driver, post_content)
-    full_screenshot = capture_full_screenshot(driver)
-    temp_full_path = 'temp_full.png'
-    with open(temp_full_path, 'wb') as f:
-        f.write(full_screenshot)
-    image = Image.open(temp_full_path)
-    location = post_content.location
-    size = post_content.size
-    left = int(location['x'])
-    top = int(location['y']) + 50
-    right = left + int(size['width'])
-    bottom = top + int(size['height'])
-    cropped_image = image.crop((left, top, right, bottom))
-    os.remove(temp_full_path)
-    return cropped_image
+    try:
+        post_content = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, '//shreddit-post'))
+        )
+        scroll_to_element_center(driver, post_content)
+        full_screenshot = capture_full_screenshot(driver)
+        temp_full_path = 'temp_full.png'
+        with open(temp_full_path, 'wb') as f:
+            f.write(full_screenshot)
+        image = Image.open(temp_full_path)
+        location = post_content.location
+        size = post_content.size
+        left = int(location['x'])
+        top = int(location['y']) + 50
+        right = left + int(size['width'])
+        bottom = top + int(size['height'])
+        cropped_image = image.crop((left, top, right, bottom))
+        os.remove(temp_full_path)
+        return cropped_image
+    except Exception as e:
+        print(f"Error capturing screenshot: {str(e)}")
+        return None
 
 def generate_voice(text, save_path):
-    stop=False
+    stop = False
     while not stop:
         try:
             tts = gTTS(text, lang='en')
             tts.save(save_path)
-            stop=True
+            stop = True
         except:
             pass
+
 def ensure_even_dimensions(image_path):
     with Image.open(image_path) as img:
         width, height = img.size
@@ -127,8 +131,10 @@ def create_subtitle_file(subtitles, output_path):
         print(f"Subtitle file created successfully: {output_path}")
     except Exception as e:
         print(f"Error creating subtitle file: {str(e)}")
+
 def escape_text_for_ffmpeg(text):
     return text.replace("'", "'\\''").replace('"', '\\"').replace(':', '\\:').replace('\\', '\\\\')
+
 def create_wrapped_title(title, max_line_length=100):
     words = title.split(' ')
     lines = []
@@ -146,7 +152,6 @@ def create_wrapped_title(title, max_line_length=100):
     
     if current_line:
         lines.append(' '.join(current_line))
-    return title
     return '\\n'.join(lines)
 
 def create_ffmpeg_subtitle_filter(subtitles):
@@ -155,8 +160,8 @@ def create_ffmpeg_subtitle_filter(subtitles):
         start_time = sub['start']
         end_time = sub['end']
         word = escape_text_for_ffmpeg(sub['word'])
-        if word:  # Chỉ thêm filter nếu từ không trống
-            fontsize = random.randint(64, 160)  # Random font size between 64 and 160
+        if word:
+            fontsize = random.randint(64, 160)
             subtitle_filters.append(
                 f"drawtext=fontfile=/path/to/font.ttf:fontsize={fontsize}:fontcolor=yellow:box=1:boxcolor=black@0.5:boxborderw=5:x=(w-tw)/2:y=h-th-200:text='{word}':enable='between(t,{start_time},{end_time})'"
             )
@@ -167,20 +172,23 @@ def check_file_exists(file_path):
         print(f"Error: File not found: {file_path}")
         return False
     return True
+
 options = Options()
-options.add_argument("--headless")
+options.add_argument("--headless=new")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--disable-gpu")
 options.add_argument("--disable-features=NetworkService")
-options.add_argument("--window-size=1920x1080")
 options.add_argument("--disable-features=VizDisplayCompositor")
 options.add_argument('--ignore-certificate-errors')
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=options)
+options.add_argument("--window-size=3840,2160")
+options.add_argument("--start-maximized")
+options.add_argument("--disable-extensions")
+options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36")
 
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 driver.get("https://www.reddit.com")
-
+WebDriverWait(driver, 20).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'article.w-full.m-0')))
 posts = driver.find_elements(By.CSS_SELECTOR, 'article.w-full.m-0')[:3]
 
 post_data = []
@@ -190,26 +198,20 @@ for post in posts:
     title = title_element.text
     url = title_element.get_attribute('href')
     post_data.append({'title': title, 'url': url})
-def remove_credential_picker(driver):
-    try:
-        credential_picker = driver.find_element(By.ID, "credential_picker_container")
-        driver.execute_script("arguments[0].remove();", credential_picker)
-        print("Đã xoá div credential_picker_container.")
-    except Exception as e:
-        print("Div credential_picker_container không tồn tại hoặc không thể xoá: ", str(e))
 
 for i, post in enumerate(post_data, start=1):
     driver.get(post['url'])
-    time.sleep(3)
-
-    # Gọi hàm để xoá div nếu tồn tại
-    remove_credential_picker(driver)
+    time.sleep(5)  # Increased wait time
 
     post_image = capture_post_screenshot(driver)
-    post_screenshot_path = f"post_{i}.png"
+    if post_image is None:
+        print(f"Failed to capture screenshot for post {i}. Skipping...")
+        continue
+
+    post_screenshot_path = os.path.abspath(f"post_{i}.png")
     post_image.save(post_screenshot_path)
 
-    background_image_path = f"post_{i}_fullview.png"
+    background_image_path = os.path.abspath(f"post_{i}_fullview.png")
     fullview_screenshot = capture_full_screenshot(driver)
     with open(background_image_path, 'wb') as f:
         f.write(fullview_screenshot)
@@ -217,24 +219,22 @@ for i, post in enumerate(post_data, start=1):
     ensure_even_dimensions(background_image_path)
     ensure_even_dimensions(post_screenshot_path)
 
-    audio_path = f"post_{i}_audio.mp3"
+    audio_path = os.path.abspath(f"post_{i}_audio.mp3")
     generate_voice(post['title'], audio_path)
 
     subtitles = generate_subtitles(audio_path, post['title'])
-    subtitle_path = f"subtitles_{i}.txt"
+    subtitle_path = os.path.abspath(f"subtitles_{i}.txt")
     create_subtitle_file(subtitles, subtitle_path)
 
-    video_output_path = f"post_{i}_final.mp4"
+    video_output_path = os.path.abspath(f"post_{i}_final.mp4")
 
-    subtitles = generate_subtitles(audio_path, post['title'])
     subtitle_filter = create_ffmpeg_subtitle_filter(subtitles)
     escaped_title = escape_text_for_ffmpeg(post['title'])
 
     if all(check_file_exists(f) for f in [background_image_path, post_screenshot_path, audio_path]):
-        escaped_title = escape_text_for_ffmpeg(post['title'])
         wrapped_title = create_wrapped_title(escaped_title)
-        wrapped_title=remove_emojis(wrapped_title)
-        wrapped_title=remove_special_characters(wrapped_title)
+        wrapped_title = remove_emojis(wrapped_title)
+        wrapped_title = remove_special_characters(wrapped_title)
         filter_complex = (
             "[0:v]scale=3840:-1,boxblur=6:2[bg];"
             "[1:v]scale=iw*3:ih*3[post];"
@@ -265,7 +265,7 @@ for i, post in enumerate(post_data, start=1):
 
         try:
             print(f"Running FFmpeg command for post {i}")
-            print(f"FFmpeg command: {' '.join(ffmpeg_command)}")  # Print the full command for debugging
+            print(f"FFmpeg command: {' '.join(ffmpeg_command)}")
             result = subprocess.run(ffmpeg_command, check=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE, universal_newlines=True)
             print(f"FFmpeg stdout: {result.stdout}")
             print(f"FFmpeg stderr: {result.stderr}")
@@ -278,24 +278,44 @@ for i, post in enumerate(post_data, start=1):
             print(f"FFmpeg error output: {e.stderr}")
     else:
         print(f"Skipping video creation for post {i} due to missing files.")
+
 driver.quit()
+concat_file = os.path.abspath("concat.txt")
+if video_clips:
+    concat_file = os.path.abspath("concat.txt")
+    with open(concat_file, 'w') as f:
+        for clip in video_clips:
+            if os.path.exists(clip):
+                f.write(f"file '{clip}'\n")
+    
+    with open(concat_file, 'r') as f:
+        print("Contents of concat.txt:")
+        print(f.read())
+    
+    if os.path.getsize(concat_file) > 0:
+        final_video_path = os.path.abspath("final_video.mp4")
+        ffmpeg_concat_command = [
+            "ffmpeg",
+            "-y",
+            "-f", "concat",
+            "-safe", "0",
+            "-i", concat_file,
+            "-c", "copy",
+            final_video_path
+        ]
+        try:
+            subprocess.run(ffmpeg_concat_command, check=True)
+            print(f"Final video created: {final_video_path}")
+        except subprocess.CalledProcessError as e:
+            print(f"Error concatenating videos: {e}")
+    else:
+        print("No valid video clips to concat.")
+else:
+    print("No video clips were created.")
 
-video_clips = [f"post_{i}_final.mp4" for i in range(1, len(post_data) + 1)]
-concat_file = "concat.txt"
-with open(concat_file, 'w') as f:
-    for clip in video_clips:
-        f.write(f"file '{os.path.abspath(clip)}'\n")
-
-final_video_path = "final_video.mp4"
-ffmpeg_concat_command = [
-    "ffmpeg",
-    "-y",
-    "-f", "concat", "-safe", "0", "-i", concat_file, "-c", "copy", final_video_path
-]
-subprocess.run(ffmpeg_concat_command)
-
-os.remove(concat_file)
-for clip in video_clips:
-    os.remove(clip)
+# Clean up temporary files
+for file in [concat_file] + video_clips:
+    if os.path.exists(file):
+        os.remove(file)
 
 print("Video creation process completed.")

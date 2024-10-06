@@ -50,7 +50,8 @@ def start_livestream(video_path):
         "-preset", "veryfast",
         "-maxrate", "3000k",
         "-bufsize", "6000k",
-        "-pix_fmt", "yuv420p",
+        "-pix_fmt", "yuv420p",  # Đảm bảo định dạng pixel được hỗ trợ
+        "-vf", "format=yuv420p",  # Chuyển đổi video đầu vào sang yuv420p
         "-g", "50",
         "-c:a", "aac",
         "-b:a", "128k",
@@ -58,7 +59,20 @@ def start_livestream(video_path):
         "-f", "flv",
         f"rtmp://a.rtmp.youtube.com/live2/{YOUTUBE_KEY}"
     ]
-    return subprocess.Popen(ffmpeg_command)
+    return subprocess.Popen(ffmpeg_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+# Thêm hàm mới để kiểm tra lỗi FFmpeg
+def check_ffmpeg_error(process):
+    while True:
+        output = process.stderr.readline()
+        if output == '' and process.poll() is not None:
+            break
+        if output:
+            print(f"FFmpeg error: {output.strip().decode()}")
+            if "Unsupported pixel format" in output.decode():
+                print("Lỗi định dạng pixel không được hỗ trợ. Đang thử chuyển đổi...")
+                return False
+    return True
 
 def main():
     if not os.path.exists(VIDEO_OUTPUT_DIR):
@@ -68,7 +82,6 @@ def main():
     stream_process = None
 
     while True:
-        # Tạo video mới
         print("Đang tạo video mới...")
         new_video_path = create_video()
 
@@ -77,6 +90,13 @@ def main():
             
             # Bắt đầu phát trực tiếp video mới
             new_stream_process = start_livestream(new_video_path)
+            
+            # Kiểm tra lỗi FFmpeg
+            if not check_ffmpeg_error(new_stream_process):
+                print("Đang thử lại với cài đặt khác...")
+                new_stream_process.terminate()
+                new_stream_process.wait()
+                continue
             
             # Nếu có luồng stream cũ, kết thúc nó và xóa video cũ
             if stream_process:
@@ -96,7 +116,6 @@ def main():
         else:
             print("Không tạo được video mới. Đang thử lại...")
             time.sleep(60)  # Đợi 1 phút trước khi thử lại
-
 if __name__ == "__main__":
     try:
         req=requests.get('http://localhost:8888')

@@ -1,0 +1,140 @@
+1728228149220	geckodriver	INFO	Listening on 127.0.0.1:53699
+1728228152258	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53700" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ADmin\\AppData\\Local\\Temp\\rust_mozprofile2uEfh1"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1728228152486	Marionette	INFO	Marionette enabled
+1728228152763	Marionette	INFO	Listening on port 53710
+WebDriver BiDi listening on ws://127.0.0.1:53700
+Read port: 53710
+1728228152923	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+JavaScript warning: https://accounts.google.com/gsi/iframe/select?client_id=705819728788-b2c1kcs7tst3b7ghv7at0hkqmtc68ckl.apps.googleusercontent.com&auto_select=true&ux_mode=popup&ui_mode=card&as=n0ij860itiDJMxWno9NaKQ&is_itp=true&channel_id=549d9be84eb176b76ff1cde2216d128b6d2f3abd14c03a26ac7bc49451bc0b31&origin=https%3A%2F%2Fwww.reddit.com, line 79: Script terminated by timeout at:
+_.Gb<@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQUEM/d=1/rs=AF0KOtVoJqNdpvQ3HXdbDCZyPnqgtE_K6Q/m=credential_server_library:79:927
+Pb@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQUEM/d=1/rs=AF0KOtVoJqNdpvQ3HXdbDCZyPnqgtE_K6Q/m=credential_server_library:67:344
+_.rd@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQUEM/d=1/rs=AF0KOtVoJqNdpvQ3HXdbDCZyPnqgtE_K6Q/m=credential_server_library:79:2551
+Mi@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQUEM/d=1/rs=AF0KOtVoJqNdpvQ3HXdbDCZyPnqgtE_K6Q/m=credential_server_library:215:222
+Ii.prototype.D@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQUEM/d=1/rs=AF0KOtVoJqNdpvQ3HXdbDCZyPnqgtE_K6Q/m=credential_server_library:212:29
+Ii/<@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQUEM/d=1/rs=AF0KOtVoJqNdpvQ3HXdbDCZyPnqgtE_K6Q/m=credential_server_library:206:282
+
+JavaScript warning: https://platform.twitter.com/embed/embed.9449.78398904051446294e3d.js, line 2: Script terminated by timeout at:
+20097/e/<@https://platform.twitter.com/embed/embed.9449.78398904051446294e3d.js:2:58211
+
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+1728228331877	Marionette	INFO	Stopped listening on port 53710
+Dynamically enable window occlusion 1
+JavaScript error: https://www.redditstatic.com/shreddit/sentry-94f7e90f.js, line 1: TypeError: can't access dead object
+1728228661582	geckodriver	INFO	Listening on 127.0.0.1:54120
+1728228664646	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Firefox Developer Edition\\firefox.exe" "--marionette" "-headless" "--remote-debugging-p ... 1" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ADmin\\AppData\\Local\\Temp\\rust_mozprofile1BsaIY"
+*** You are running in headless mode.
+1728228720348	geckodriver	INFO	Listening on 127.0.0.1:54199
+1728228723379	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Firefox Developer Edition\\firefox.exe" "--marionette" "-headless" "--remote-debugging-p ... 0" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ADmin\\AppData\\Local\\Temp\\rust_mozprofileGASrOG"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1728228723608	Marionette	INFO	Marionette enabled
+1728228723719	Marionette	INFO	Listening on port 54209
+WebDriver BiDi listening on ws://127.0.0.1:54200
+Read port: 54209
+1728228723831	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+Exiting due to channel error.
+Exiting due to channel error.
+28228850458	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Firefox Developer Edition\\firefox.exe" "--marionette" "--headless=new" "--remote-debugg ... 5" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ADmin\\AppData\\Local\\Temp\\rust_mozprofile8paljb"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1728228850686	Marionette	INFO	Marionette enabled
+console.error: "Warning: unrecognized command line flag" "-headless"
+1728228850963	Marionette	INFO	Listening on port 54373
+WebDriver BiDi listening on ws://127.0.0.1:54365
+Read port: 54373
+1728228851084	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+Exiting due to channel error.
+Exiting due to channel error.
+28228899703	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Firefox Developer Edition\\firefox.exe" "--marionette" "--headless=true" "--remote-debug ... 5" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ADmin\\AppData\\Local\\Temp\\rust_mozprofileLSn3Go"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1728228899932	Marionette	INFO	Marionette enabled
+console.error: "Warning: unrecognized command line flag" "-headless"
+1728228900054	Marionette	INFO	Listening on port 54452
+WebDriver BiDi listening on ws://127.0.0.1:54445
+Read port: 54452
+1728228900172	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+Exiting due to channel error.
+[GFX1-]: CompositorBridgeChild receives IPC close with reason=AbnormalShutdown
+[GFX1-]: CompositorBridgeChild receives IPC close with reason=AbnormalShutdown
+[GFX1-]: CompositorBridgeChild receives IPC close with reason=AbnormalShutdown
+ "C:\\Users\\ADmin\\AppData\\Local\\Temp\\rust_mozprofilejAj3Ya"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1728228944182	Marionette	INFO	Marionette enabled
+1728228944300	Marionette	INFO	Listening on port 54534
+WebDriver BiDi listening on ws://127.0.0.1:54525
+Read port: 54534
+1728228944442	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+JavaScript warning: https://accounts.google.com/gsi/iframe/select?client_id=705819728788-b2c1kcs7tst3b7ghv7at0hkqmtc68ckl.apps.googleusercontent.com&auto_select=true&ux_mode=popup&ui_mode=card&as=PDVsy2eoUEH1bnER0BUzqw&is_itp=true&channel_id=5850a059d937a9b38fd528ee9eba94a59bddb2dd69458f3c26780fe084ce3277&origin=https%3A%2F%2Fwww.reddit.com, line 79: Script terminated by timeout at:
+_.Gb<@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQQEM/d=1/rs=AF0KOtXVNMhffnUdo5jzQhYB3oyNDtKq2w/m=credential_server_library:79:927
+Pb@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQQEM/d=1/rs=AF0KOtXVNMhffnUdo5jzQhYB3oyNDtKq2w/m=credential_server_library:67:344
+_.G@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQQEM/d=1/rs=AF0KOtXVNMhffnUdo5jzQhYB3oyNDtKq2w/m=credential_server_library:80:275
+Qi@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQQEM/d=1/rs=AF0KOtXVNMhffnUdo5jzQhYB3oyNDtKq2w/m=credential_server_library:215:286
+Mi@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQQEM/d=1/rs=AF0KOtXVNMhffnUdo5jzQhYB3oyNDtKq2w/m=credential_server_library:215:225
+Ii.prototype.D@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQQEM/d=1/rs=AF0KOtXVNMhffnUdo5jzQhYB3oyNDtKq2w/m=credential_server_library:212:29
+Ii/<@/_/gsi/_/js/k=gsi.gsi.ja.5snOH5NZshE.O/am=AAAiQQEM/d=1/rs=AF0KOtXVNMhffnUdo5jzQhYB3oyNDtKq2w/m=credential_server_library:206:282
+
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+Exiting due to channel error.
+Exiting due to channel error.
+1728229111953	geckodriver	INFO	Listening on 127.0.0.1:54714
+Invalid port. Exiting...
+Invalid port. Exiting...
+1728229193081	geckodriver	INFO	Listening on 127.0.0.1:54757
+1728229196162	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Firefox Developer Edition\\firefox.exe" "--marionette" "--remote-debugging-port" "54758" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\ADmin\\AppData\\Local\\Temp\\rust_mozprofilesagEfn"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1728229196886	Marionette	INFO	Marionette enabled
+1728229197070	Marionette	INFO	Listening on port 54765
+WebDriver BiDi listening on ws://127.0.0.1:54758
+Read port: 54765
+1728229197193	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+JavaScript error: , line 0: uncaught exception: Timeout
+JavaScript warning: https://platform.twitter.com/embed/embed.9203.1b3edf1dee6d205547e0.js, line 2: Script terminated by timeout at:
+82131/h/<@https://platform.twitter.com/embed/embed.9203.1b3edf1dee6d205547e0.js:2:258562
+p@https://platform.twitter.com/embed/embed.9203.1b3edf1dee6d205547e0.js:2:260639
+n@https://platform.twitter.com/embed/embed.9203.1b3edf1dee6d205547e0.js:2:258092
+
+JavaScript error: resource://gre/actors/FormHandlerChild.sys.mjs, line 103: InvalidStateError: JSWindowActorChild.document getter: Cannot access property 'document' after actor 'FormHandler' has been destroyed
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.reddit.com."
+1728229442768	Marionette	INFO	Stopped listening on port 54765
+JavaScript warning: https://www.redditstatic.com/shreddit/sentry-94f7e90f.js, line 1: Script terminated by timeout at:
+r@https://www.redditstatic.com/shreddit/sentry-94f7e90f.js:1:55855
+
+Dynamically enable window occlusion 1
+JavaScript error: https://www.redditstatic.com/shreddit/sentry-94f7e90f.js, line 1: TypeError: can't access dead object
