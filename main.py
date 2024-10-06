@@ -1,5 +1,9 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 from PIL import Image
 from gtts import gTTS
@@ -163,7 +167,18 @@ def check_file_exists(file_path):
         print(f"Error: File not found: {file_path}")
         return False
     return True
-driver = webdriver.Firefox()
+options = Options()
+options.add_argument("--headless")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--disable-gpu")
+options.add_argument("--disable-features=NetworkService")
+options.add_argument("--window-size=1920x1080")
+options.add_argument("--disable-features=VizDisplayCompositor")
+options.add_argument('--ignore-certificate-errors')
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=options)
+
 driver.get("https://www.reddit.com")
 
 posts = driver.find_elements(By.CSS_SELECTOR, 'article.w-full.m-0')[:3]
