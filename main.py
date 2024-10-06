@@ -181,7 +181,7 @@ options.add_argument("--disable-gpu")
 options.add_argument("--disable-features=NetworkService")
 options.add_argument("--disable-features=VizDisplayCompositor")
 options.add_argument('--ignore-certificate-errors')
-options.add_argument("--window-size=3840,2160")
+options.add_argument("--window-size=1920,1080")
 options.add_argument("--start-maximized")
 options.add_argument("--disable-extensions")
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36")
@@ -236,7 +236,7 @@ for i, post in enumerate(post_data, start=1):
         wrapped_title = remove_emojis(wrapped_title)
         wrapped_title = remove_special_characters(wrapped_title)
         filter_complex = (
-            "[0:v]scale=3840:-1,boxblur=6:2[bg];"
+            "[0:v]scale=1920:-1,boxblur=6:2[bg];"
             "[1:v]scale=iw*3:ih*3[post];"
             "[bg][post]overlay=(W-w)/2:(H-h)/2[v1];"
             f"[v1]drawtext=fontfile=/path/to/font.ttf:fontsize=100:fontcolor=white:box=1:boxcolor=black@0.5:boxborderw=5:"
