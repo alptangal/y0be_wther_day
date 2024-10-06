@@ -1,7 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import time
 from PIL import Image
@@ -12,7 +9,6 @@ import speech_recognition as sr
 from pydub import AudioSegment
 import re
 import emoji
-
 
 def remove_special_characters(string):
     # Định nghĩa pattern để giữ lại chữ cái, số và khoảng trắng
@@ -167,13 +163,8 @@ def check_file_exists(file_path):
         print(f"Error: File not found: {file_path}")
         return False
     return True
-chrome_options = Options()
-chrome_options.add_argument("--headless")  # Run Chrome in headless mode (optional)
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=chrome_options)
-
+driver = webdriver.Firefox()
 driver.get("https://www.reddit.com")
-
 
 posts = driver.find_elements(By.CSS_SELECTOR, 'article.w-full.m-0')[:3]
 
