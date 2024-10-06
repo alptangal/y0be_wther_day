@@ -122,6 +122,7 @@ if __name__ == "__main__":
         print(req.status_code)
         print('Client closed')
         exit()
-    except:
+    except Exception as err:
+        print(err)
         server.b()
         main()
