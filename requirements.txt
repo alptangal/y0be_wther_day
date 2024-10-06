@@ -1,4 +1,4 @@
-selenium
+
 gtts
 mutagen
 requests
@@ -7,3 +7,5 @@ webdriver-manager
 SpeechRecognition
 pydub
 emoji
+streamlit
+selenium
