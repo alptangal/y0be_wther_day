@@ -35,4 +35,4 @@ options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) Apple
 
 driver = webdriver.Chrome( options=options)
 driver.get("https://www.reddit.com")
-print(str(driver))
+print(str(driver.page_source))
