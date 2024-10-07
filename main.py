@@ -186,7 +186,7 @@ options.add_argument("--start-maximized")
 options.add_argument("--disable-extensions")
 options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36")
 
-driver = webdriver.Chrome(options=options)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 driver.get("https://www.reddit.com")
 #WebDriverWait(driver, 20).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'article.w-full.m-0')))
 posts = driver.find_elements(By.CSS_SELECTOR, 'article.w-full.m-0')[:3]
