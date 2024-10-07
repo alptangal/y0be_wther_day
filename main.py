@@ -188,7 +188,7 @@ options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) Apple
 
 driver = webdriver.Chrome(options=options)
 driver.get("https://www.reddit.com")
-WebDriverWait(driver, 20).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'article.w-full.m-0')))
+#WebDriverWait(driver, 20).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'article.w-full.m-0')))
 posts = driver.find_elements(By.CSS_SELECTOR, 'article.w-full.m-0')[:3]
 
 post_data = []
