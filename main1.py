@@ -11,7 +11,7 @@ MAIN_SCRIPT_PATH = "main.py"
 # Thư mục chứa video output
 VIDEO_OUTPUT_DIR = "output_videos"
 # YouTube stream key
-YOUTUBE_KEY ='pmfq-5pc5-u1e8-5s1p-caqf' #os.environ.get('ytb')
+YOUTUBE_KEY =os.environ.get('ytb')
 
 def create_video():
     print("Bắt đầu tạo video...")
