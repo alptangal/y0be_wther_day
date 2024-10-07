@@ -16,7 +16,7 @@ import subprocess
 import os
 import random
 import speech_recognition as sr
-#from pydub import AudioSegment
+#from pydub import AudioSegment 
 import re
 import emoji
 
